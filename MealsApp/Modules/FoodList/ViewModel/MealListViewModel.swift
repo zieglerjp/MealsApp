@@ -42,7 +42,11 @@ extension MealListViewModelAdapter: MealListViewModel {
         self.getRandomMealUseCase.execute { (response) in
             switch response {
             case .success(let meal):
-                completion(.success(meal.image))
+                guard let mealImage = meal.imageURL else {
+                    completion(.failure(WrappedError(cause: "Error")))
+                    return
+                }
+                completion(.success(mealImage))
             case .failure(let error):
                 completion(.failure(error))
             }

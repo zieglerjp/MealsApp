@@ -11,8 +11,25 @@ import Foundation
 struct Meal: Codable {
     let id: String
     let category: String
-    let image: URL
+    let image: String
+    
+    var imageURL: URL? {
+        return URL(string: image)
+    }
+    
     let name: String
+    let youtubeLink: String
+    
+    var youtubeLinkURL: URL? {
+         let pattern = "((?<=(v|V)/)|(?<=be/)|(?<=(\\?|\\&)v=)|(?<=embed/))([\\w-]++)"
+         let regex = try? NSRegularExpression(pattern: pattern, options: .caseInsensitive)
+         let range = NSRange(location: 0, length: youtubeLink.count)
+         guard let result = regex?.firstMatch(in: youtubeLink, range: range) else {
+         return nil
+         }
+        return URL(string: "https://www.youtube.com/embed/\((youtubeLink as NSString).substring(with: result.range))")
+    }
+    
     let instructions: String
     let ingredients1: String?
     let ingredients2: String?
@@ -97,5 +114,6 @@ struct Meal: Codable {
         case ingredients18 = "strIngredient18"
         case ingredients19 = "strIngredient19"
         case ingredients20 = "strIngredient20"
+        case youtubeLink = "strYoutube"
     }
 }
