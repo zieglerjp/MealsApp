@@ -22,5 +22,10 @@ class MealIngredientsTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    
+ 
+    func configure(_ ingredient: String) {
+        mealIngredientLabel.font = .systemFont(ofSize: 14, weight: .regular)
+        mealIngredientLabel.text = ingredient
+        mealIngredientLabel.numberOfLines = 0
+    }
 }

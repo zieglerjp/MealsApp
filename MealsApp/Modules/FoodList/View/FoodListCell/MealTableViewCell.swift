@@ -28,6 +28,7 @@ class MealTableViewCell: UITableViewCell {
         self.mealNameLabel.text = viewModel.getName
         
         self.mealNameLabel.font = .systemFont(ofSize: 20, weight: .regular)
+        self.mealNameLabel.numberOfLines = 0
         self.mealCategoryLabel.text = viewModel.getCategory
         
         self.mealNameLabel.font = .systemFont(ofSize: 15, weight: .regular)

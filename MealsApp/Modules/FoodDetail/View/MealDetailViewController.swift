@@ -25,15 +25,34 @@ class MealDetailViewController: UIViewController {
     }
     
     private func configureNavigationBar() {
-         self.navigationItem.title = "Meal Detail"
+        self.title = "Meal Detail"
      }
     
     func configureUI() {
-        self.mealNameLabel.text = viewModel?.getName
-        self.mealNameLabel.font = .systemFont(ofSize: 30, weight: .regular)
+        configureNavigationBar()
+        configureNameLabel()
+        configureTextView()
+        configureTableView()
+    }
+    
+    private func configureTextView() {
         self.mealInstructionsTextView.text = viewModel?.getInstructions
     }
     
+    private func configureNameLabel() {
+        self.mealNameLabel.text = viewModel?.getName
+        self.mealNameLabel.font = .systemFont(ofSize: 30, weight: .regular)
+        self.mealNameLabel.numberOfLines = 0
+        self.mealNameLabel.textAlignment = .center
+    }
+    
+    private func configureTableView() {
+        let nib = UINib(nibName: "MealIngredientsTableViewCell", bundle: nil)
+        self.mealsIngredientsTableView.register(nib, forCellReuseIdentifier: "MealIngredientsTableViewCell")
+        self.mealsIngredientsTableView.dataSource = self
+        self.mealsIngredientsTableView.allowsSelection = false
+        self.mealsIngredientsTableView.tableFooterView = UIView(frame: .zero)
+    }
 
     /*
     // MARK: - Navigation
@@ -45,4 +64,21 @@ class MealDetailViewController: UIViewController {
     }
     */
 
+}
+
+extension MealDetailViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.viewModel?.getIngredients.count ?? 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "MealIngredientsTableViewCell") as? MealIngredientsTableViewCell,
+            let ingredient = viewModel?.getIngredients[indexPath.row] else {
+            return UITableViewCell()
+        }
+        
+        cell.configure(ingredient)
+        return cell
+    }
+    
 }
