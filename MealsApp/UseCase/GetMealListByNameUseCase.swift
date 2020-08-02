@@ -11,7 +11,7 @@ import Foundation
 enum GetMealListResponse {
     case success(meals: [Meal])
     case empty
-    case failure(error: Error)
+    case failure(error: WrappedError)
 }
 
 typealias GetMealListByNameResponseClosure = (GetMealListResponse) -> ()

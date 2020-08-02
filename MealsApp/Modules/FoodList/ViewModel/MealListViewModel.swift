@@ -11,12 +11,12 @@ import Foundation
 enum GetMealsSearchResponse {
     case success
     case empty
-    case failure(Error)
+    case failure(WrappedError)
 }
 
 enum GetRandomMealResponse {
     case success(URL)
-    case failure(Error)
+    case failure(WrappedError)
 }
 
 protocol MealListViewModel {
