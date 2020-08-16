@@ -9,14 +9,14 @@
 import Foundation
 
 protocol MealCellViewModel {
-    var getImage: URL { get }
+    var getImage: URL? { get }
     var getName: String { get }
     var getCategory: String { get }
 }
 
 final class MealCellViewModelAdapter: MealCellViewModel {
-    var getImage: URL {
-        return meal.image
+    var getImage: URL? {
+        return meal.imageURL
     }
     
     var getName: String {

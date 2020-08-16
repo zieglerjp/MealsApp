@@ -7,14 +7,17 @@
 //
 
 import UIKit
+import WebKit
 
 class MealDetailViewController: UIViewController {
 
-    @IBOutlet weak var mealNameLabel: UILabel!
+    @IBOutlet private weak var mealNameLabel: UILabel!
     
-    @IBOutlet weak var mealInstructionsTextView: UITextView!
+    @IBOutlet private weak var mealInstructionsTextView: UITextView!
     
-    @IBOutlet weak var mealsIngredientsTableView: UITableView!
+    @IBOutlet private weak var mealsIngredientsTableView: UITableView!
+    
+    @IBOutlet private weak var webView: WKWebView!
     
     var viewModel: MealDetailViewModel?
     
@@ -33,6 +36,7 @@ class MealDetailViewController: UIViewController {
         configureNameLabel()
         configureTextView()
         configureTableView()
+        configureWebKit()
     }
     
     private func configureTextView() {
@@ -52,6 +56,13 @@ class MealDetailViewController: UIViewController {
         self.mealsIngredientsTableView.dataSource = self
         self.mealsIngredientsTableView.allowsSelection = false
         self.mealsIngredientsTableView.tableFooterView = UIView(frame: .zero)
+    }
+    
+    private func configureWebKit() {
+        guard let link = viewModel?.getYoutubeLink else {
+            return
+        }
+        self.webView.load(.init(url: link))
     }
 
     /*

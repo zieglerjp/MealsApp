@@ -12,9 +12,14 @@ protocol MealDetailViewModel {
     var getInstructions: String { get }
     var getName: String { get }
     var getIngredients: [String] { get }
+    var getYoutubeLink: URL? { get }
 }
 
 final class MealDetailViewModelAdapter: MealDetailViewModel {
+    var getYoutubeLink: URL? {
+        return meal.youtubeLinkURL
+    }
+    
     var getInstructions: String {
         return meal.instructions
     }

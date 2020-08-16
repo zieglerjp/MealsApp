@@ -32,7 +32,10 @@ class MealTableViewCell: UITableViewCell {
         self.mealCategoryLabel.text = viewModel.getCategory
         
         self.mealNameLabel.font = .systemFont(ofSize: 15, weight: .regular)
-        self.mealImageView.image(fromUrl: viewModel.getImage)
+        guard let image = viewModel.getImage else {
+            return
+        }
+        self.mealImageView.image(fromUrl: image)
     }
     
 }
