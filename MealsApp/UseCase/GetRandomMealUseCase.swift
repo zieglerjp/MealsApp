@@ -10,7 +10,7 @@ import Foundation
 
 enum GetRandomMealResult {
     case success(meal: Meal)
-    case failure(error: Error)
+    case failure(error: WrappedError)
 }
 
 typealias GetRandomMealResponseClosure = (GetRandomMealResult) -> ()
