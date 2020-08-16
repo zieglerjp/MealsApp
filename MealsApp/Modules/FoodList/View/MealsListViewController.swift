@@ -10,28 +10,47 @@ import UIKit
 
 class MealsListViewController: UIViewController {
 
-    
     @IBOutlet weak var searchBar: UISearchBar!
     
     @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet weak var bannerImageView: UIImageView!
+    
+    @objc private func renewBanner() {
+        self.viewModel?.getRandomMeal(completion: { (response) in
+            switch response {
+            case .success(let url):
+                self.bannerImageView.image(fromUrl: url)
+            case .failure(_):
+                break
+            }
+        })
+    }
+    
     var viewModel: MealListViewModel?
+    var timer: Timer?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        configureUI()
+        
         viewModel = MealListViewModelAdapter()
+        configureUI()
     }
     
     private func configureUI() {
         configureNavigationBar()
         configureSearchBar()
         configureTableView()
+        configureBannerImageView()
     }
     
     private func configureNavigationBar() {
         self.navigationItem.title = "Meals List"
+    }
+    
+    private func configureBannerImageView() {
+        self.bannerImageView.contentMode = .scaleAspectFill
+        self.timer = Timer.scheduledTimer(timeInterval: 30, target: self, selector: #selector(renewBanner), userInfo: nil, repeats: true)
     }
     
     private func configureSearchBar() {
@@ -66,7 +85,8 @@ extension MealsListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "MealTableViewCell") as? MealTableViewCell,
-        let viewModel = viewModel else {
+            let viewModel = self.viewModel,
+            indexPath.row < viewModel.mealsList.count else {
             return UITableViewCell()
         }
         

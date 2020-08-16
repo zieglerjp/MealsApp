@@ -21,17 +21,21 @@ class MealTableViewCell: UITableViewCell {
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
+        super.setSelected(false, animated: false)
     }
     
     func configure(viewModel: MealCellViewModel) {
         self.mealNameLabel.text = viewModel.getName
         
         self.mealNameLabel.font = .systemFont(ofSize: 20, weight: .regular)
+        self.mealNameLabel.numberOfLines = 0
         self.mealCategoryLabel.text = viewModel.getCategory
         
         self.mealNameLabel.font = .systemFont(ofSize: 15, weight: .regular)
-        self.mealImageView.image(fromUrl: viewModel.getImage)
+        guard let image = viewModel.getImage else {
+            return
+        }
+        self.mealImageView.image(fromUrl: image)
     }
     
 }

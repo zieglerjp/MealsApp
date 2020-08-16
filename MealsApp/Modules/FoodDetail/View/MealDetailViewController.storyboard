@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -12,50 +12,70 @@
             <objects>
                 <viewController storyboardIdentifier="MealDetailViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="2Wf-SF-fnx" customClass="MealDetailViewController" customModule="MealsApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="SZG-kk-2L4">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yIt-a0-2gN">
-                                <rect key="frame" x="186" y="64" width="42" height="21"/>
+                                <rect key="frame" x="10" y="20" width="300" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="GFz-Xj-68h">
-                                <rect key="frame" x="20" y="115" width="374" height="619"/>
+                                <rect key="frame" x="20" y="68" width="280" height="150"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="150" id="sPv-MX-xWq"/>
+                                </constraints>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="9Jl-5G-Ol0">
-                                <rect key="frame" x="0.0" y="734" width="414" height="128"/>
+                                <rect key="frame" x="0.0" y="218" width="320" height="150"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="128" id="8f0-Cq-HG0"/>
+                                    <constraint firstAttribute="height" constant="150" id="uWa-IR-397"/>
                                 </constraints>
                             </tableView>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MYs-hN-ba5">
+                                <rect key="frame" x="0.0" y="368" width="320" height="200"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="Ewa-TZ-1gR"/>
+                                </constraints>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="yIt-a0-2gN" firstAttribute="centerX" secondItem="GMX-jb-Cjh" secondAttribute="centerX" id="Az8-NO-mBC"/>
                             <constraint firstItem="9Jl-5G-Ol0" firstAttribute="top" secondItem="GFz-Xj-68h" secondAttribute="bottom" id="BF4-0E-NsH"/>
+                            <constraint firstItem="GMX-jb-Cjh" firstAttribute="bottom" secondItem="MYs-hN-ba5" secondAttribute="bottom" id="LAI-uY-sfm"/>
                             <constraint firstItem="GMX-jb-Cjh" firstAttribute="trailing" secondItem="GFz-Xj-68h" secondAttribute="trailing" constant="20" id="Ozi-ow-9kp"/>
                             <constraint firstItem="yIt-a0-2gN" firstAttribute="top" secondItem="GMX-jb-Cjh" secondAttribute="top" constant="20" id="QEE-FE-CFr"/>
                             <constraint firstItem="GFz-Xj-68h" firstAttribute="leading" secondItem="GMX-jb-Cjh" secondAttribute="leading" constant="20" id="UEF-zn-KCa"/>
+                            <constraint firstItem="GMX-jb-Cjh" firstAttribute="trailing" secondItem="yIt-a0-2gN" secondAttribute="trailing" constant="10" id="V86-uE-loi"/>
                             <constraint firstItem="GFz-Xj-68h" firstAttribute="top" secondItem="yIt-a0-2gN" secondAttribute="bottom" constant="30" id="WCk-eb-M2I"/>
+                            <constraint firstItem="yIt-a0-2gN" firstAttribute="leading" secondItem="GMX-jb-Cjh" secondAttribute="leading" constant="10" id="e4z-Xr-bro"/>
+                            <constraint firstItem="MYs-hN-ba5" firstAttribute="top" secondItem="9Jl-5G-Ol0" secondAttribute="bottom" id="hTO-IE-Ryb"/>
                             <constraint firstItem="9Jl-5G-Ol0" firstAttribute="leading" secondItem="GMX-jb-Cjh" secondAttribute="leading" id="ix0-rg-V6b"/>
-                            <constraint firstItem="GMX-jb-Cjh" firstAttribute="bottom" secondItem="9Jl-5G-Ol0" secondAttribute="bottom" id="rc5-x6-U9v"/>
-                            <constraint firstItem="GFz-Xj-68h" firstAttribute="centerX" secondItem="GMX-jb-Cjh" secondAttribute="centerX" id="wCG-Ln-zoF"/>
+                            <constraint firstItem="MYs-hN-ba5" firstAttribute="leading" secondItem="GMX-jb-Cjh" secondAttribute="leading" id="lKm-Qa-W64"/>
+                            <constraint firstItem="GMX-jb-Cjh" firstAttribute="trailing" secondItem="MYs-hN-ba5" secondAttribute="trailing" id="sYq-i1-6gP"/>
                             <constraint firstItem="GMX-jb-Cjh" firstAttribute="trailing" secondItem="9Jl-5G-Ol0" secondAttribute="trailing" id="yiS-OE-Cax"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="GMX-jb-Cjh"/>
                     </view>
+                    <navigationItem key="navigationItem" id="TPS-T9-im5"/>
                     <connections>
                         <outlet property="mealInstructionsTextView" destination="GFz-Xj-68h" id="4d5-HV-obR"/>
                         <outlet property="mealNameLabel" destination="yIt-a0-2gN" id="uYi-Y1-mhh"/>
                         <outlet property="mealsIngredientsTableView" destination="9Jl-5G-Ol0" id="Hf7-AJ-9ja"/>
+                        <outlet property="webView" destination="MYs-hN-ba5" id="jZN-k8-pjC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="L5v-4y-xRx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

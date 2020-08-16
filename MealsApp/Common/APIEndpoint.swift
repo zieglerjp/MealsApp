@@ -10,6 +10,7 @@ import Foundation
 
 enum APIEndpoint: String {
     case getMealList = "/api/json/v1/1/search.php"
+    case getRandomMeal = "/api/json/v1/1/random.php"
     
     // To get the API endpoint with request setup
     func getAPIEndpoint(queryItems: [URLQueryItem]? = [], headers: HTTPHeaders? = [:], body: Data? = Data()) -> URLEndpoint {
