@@ -10,5 +10,6 @@ import Foundation
 
 enum EndPoints: String {
     case getMealList = "search.php"
+    case getRandomMeal = "random.php"
 }
 

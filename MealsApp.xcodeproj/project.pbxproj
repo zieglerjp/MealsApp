@@ -36,6 +36,8 @@
 		384203B224D4B2EC00FD927D /* MealDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 384203B124D4B2EC00FD927D /* MealDetailViewModel.swift */; };
 		384203B624D4BD6B00FD927D /* MealIngredientsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 384203B424D4BD6B00FD927D /* MealIngredientsTableViewCell.swift */; };
 		384203B724D4BD6B00FD927D /* MealIngredientsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 384203B524D4BD6B00FD927D /* MealIngredientsTableViewCell.xib */; };
+		3843C38124D703CF0045D938 /* GetRandomMealUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3843C38024D703CF0045D938 /* GetRandomMealUseCase.swift */; };
+		3843C38324D7042A0045D938 /* GetRandomMealWebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3843C38224D7042A0045D938 /* GetRandomMealWebService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,6 +93,8 @@
 		384203B124D4B2EC00FD927D /* MealDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealDetailViewModel.swift; sourceTree = "<group>"; };
 		384203B424D4BD6B00FD927D /* MealIngredientsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealIngredientsTableViewCell.swift; sourceTree = "<group>"; };
 		384203B524D4BD6B00FD927D /* MealIngredientsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MealIngredientsTableViewCell.xib; sourceTree = "<group>"; };
+		3843C38024D703CF0045D938 /* GetRandomMealUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetRandomMealUseCase.swift; sourceTree = "<group>"; };
+		3843C38224D7042A0045D938 /* GetRandomMealWebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetRandomMealWebService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -179,6 +183,7 @@
 			isa = PBXGroup;
 			children = (
 				3842038024D4AE4700FD927D /* GetMealListWebService.swift */,
+				3843C38224D7042A0045D938 /* GetRandomMealWebService.swift */,
 			);
 			path = WebService;
 			sourceTree = "<group>";
@@ -263,6 +268,7 @@
 			isa = PBXGroup;
 			children = (
 				3842039624D4AE4700FD927D /* GetMealListByNameUseCase.swift */,
+				3843C38024D703CF0045D938 /* GetRandomMealUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -447,6 +453,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				384203A624D4AE4700FD927D /* Extension+String.swift in Sources */,
+				3843C38324D7042A0045D938 /* GetRandomMealWebService.swift in Sources */,
 				3842039B24D4AE4700FD927D /* GetMealListWebService.swift in Sources */,
 				384203AC24D4B2A400FD927D /* MealDetailViewController.swift in Sources */,
 				384203B624D4BD6B00FD927D /* MealIngredientsTableViewCell.swift in Sources */,
@@ -463,6 +470,7 @@
 				3842035024D4AE0F00FD927D /* AppDelegate.swift in Sources */,
 				384203A824D4AE4700FD927D /* GetMealListByNameUseCase.swift in Sources */,
 				384203A724D4AE4700FD927D /* NetworkManager.swift in Sources */,
+				3843C38124D703CF0045D938 /* GetRandomMealUseCase.swift in Sources */,
 				384203A124D4AE4700FD927D /* MealsListViewController.swift in Sources */,
 				3842035224D4AE0F00FD927D /* SceneDelegate.swift in Sources */,
 				3842039C24D4AE4700FD927D /* MealListViewModel.swift in Sources */,
