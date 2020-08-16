@@ -11,7 +11,7 @@ import Foundation
 protocol MealDetailViewModel {
     var getInstructions: String { get }
     var getName: String { get }
-    var getIngredient: String { get }
+    var getIngredients: [String] { get }
 }
 
 final class MealDetailViewModelAdapter: MealDetailViewModel {
@@ -19,8 +19,8 @@ final class MealDetailViewModelAdapter: MealDetailViewModel {
         return meal.instructions
     }
     
-    var getIngredient: String {
-        return meal.ingredients1 ?? ""
+    var getIngredients: [String] {
+        return meal.ingredients
     }
     
     var getName: String {

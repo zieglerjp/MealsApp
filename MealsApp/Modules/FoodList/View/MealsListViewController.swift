@@ -66,7 +66,8 @@ extension MealsListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "MealTableViewCell") as? MealTableViewCell,
-        let viewModel = viewModel else {
+            let viewModel = self.viewModel,
+            indexPath.row < viewModel.mealsList.count else {
             return UITableViewCell()
         }
         
