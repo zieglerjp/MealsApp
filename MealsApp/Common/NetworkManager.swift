@@ -8,19 +8,15 @@
 
 import Foundation
 
-struct WrappedError: Error {
-  let cause: String
-}
-
 protocol NetworkManagerProtocol {
-    func get<T: Decodable>(with endPoint: EndPoints, parameters: [String: String]?, completion: @escaping (Result<T, WrappedError>)-> Void)
+    func onlyOneCallAtTime<T: Decodable> (with request: URLRequest, endPointToCancel: APIEndpoint, completion: @escaping (Result<T, WrappedError>) -> Void)
+    func callAPI<T: Decodable>(with request: URLRequest, completion: @escaping (Result<T, WrappedError>)-> Void)
 }
 
 final class NetworkManager {
     
     struct Dependencies {
         let urlSession = URLSession.shared
-        let mainURL = "https://www.themealdb.com/api/json/v1/1/"
     }
     
     struct Constants {
@@ -28,6 +24,7 @@ final class NetworkManager {
     }
     
     var dependencies: Dependencies
+    var calls = [String: URLSessionDataTask]()
     
     init(dependencies: Dependencies = .init()) {
         self.dependencies = dependencies
@@ -35,20 +32,20 @@ final class NetworkManager {
 }
 
 extension NetworkManager: NetworkManagerProtocol {
-    
-    func get<T: Decodable>(with endPoint: EndPoints, parameters: [String : String]?, completion: @escaping (Result<T, WrappedError>) -> Void) {
- 
-        let urlWithEndpoint = dependencies.mainURL + endPoint.rawValue
-        
-        guard let completeUrl = URL(string: urlWithEndpoint + "?" + (parameters?.stringFromHttpParameters() ?? "")) else {
-            return
+    func onlyOneCallAtTime<T: Decodable> (with request: URLRequest,
+                                          endPointToCancel: APIEndpoint,
+                                          completion: @escaping (Result<T, WrappedError>) -> Void) {
+        if let dataTaskToCancel = calls[endPointToCancel.rawValue] {
+            dataTaskToCancel.cancel()
         }
-        let request = NSMutableURLRequest(url: completeUrl as URL,
-                                                cachePolicy: .useProtocolCachePolicy,
-                                                timeoutInterval: Constants.timeOut)
-        request.httpMethod = "GET"
-        
-        let dataTask = dependencies.urlSession.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
+        let dataTask = createDataTask(with: request, completion: completion)
+        calls[endPointToCancel.rawValue] = dataTask
+        dataTask.resume()
+    }
+    
+    private func createDataTask<T: Decodable>(with request: URLRequest,
+                                completion: @escaping (Result<T, WrappedError>) -> Void) -> URLSessionDataTask {
+        return dependencies.urlSession.dataTask(with: request, completionHandler: { (data, response, error) -> Void in
             if (error != nil) {
                 completion(.failure(WrappedError(cause: error!.localizedDescription)))
             } else {
@@ -66,8 +63,11 @@ extension NetworkManager: NetworkManagerProtocol {
                 }
             }
         })
-
-        dataTask.resume()
+    }
+    
+    func callAPI<T: Decodable> (with request: URLRequest,
+                              completion: @escaping (Result<T, WrappedError>) -> Void) {
+        createDataTask(with: request, completion: completion).resume()
     }
     
 }

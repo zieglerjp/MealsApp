@@ -24,8 +24,13 @@ final class GetMealListWebServiceAdapter {
 
 extension GetMealListWebServiceAdapter: GetMealListWebService {
     func execute(meal: String, completion: @escaping GetMealListWebServiceClosureResponse) {
-        let parameters = ["s": meal]
-        self.manager.get(with: .getMealList, parameters: parameters) { (response: Result<FoodListResponseModel, WrappedError>) in
+        // Query item
+        let queryItem = [ URLQueryItem(name: "s", value: meal) ]
+        
+        let api: APIEndpoint = .getMealList
+        let endpoint: URLEndpoint = api.getAPIEndpoint(queryItems: queryItem)
+        
+        self.manager.onlyOneCallAtTime(with: endpoint.request, endPointToCancel: .getMealList) { (response: Result<FoodListResponseModel, WrappedError>) in
             completion(response)
         }
     }

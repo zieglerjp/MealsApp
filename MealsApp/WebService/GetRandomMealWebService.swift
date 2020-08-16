@@ -24,7 +24,10 @@ final class GetRandomMealWebServiceAdapter {
 
 extension GetRandomMealWebServiceAdapter: GetRandomMealWebService {
     func execute(completion: @escaping GetRandomMealWebServiceClosureResponse) {
-        self.manager.get(with: .getRandomMeal, parameters: [:]) { (response: Result<FoodListResponseModel, WrappedError>) in
+        let api: APIEndpoint = .getRandomMeal
+        let endpoint: URLEndpoint = api.getAPIEndpoint()
+        
+        self.manager.callAPI(with: endpoint.request) { (response: Result<FoodListResponseModel, WrappedError>) in
             completion(response)
         }
     }
