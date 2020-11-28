@@ -39,7 +39,7 @@ final class MealListViewModelAdapter {
 
 extension MealListViewModelAdapter: MealListViewModel {
     func getRandomMeal(completion: @escaping (GetRandomMealResponse) -> ()) {
-        self.getRandomMealUseCase.execute { (response) in
+        getRandomMealUseCase.execute { (response) in
             switch response {
             case .success(let meal):
                 guard let mealImage = meal.imageURL else {
@@ -54,7 +54,7 @@ extension MealListViewModelAdapter: MealListViewModel {
     }
     
     func getMealsSearch(using text: String, completion: @escaping (GetMealsSearchResponse) -> ()) {
-        self.getMealListUseCase.execute(meal: text) { [weak self] (response) in
+        getMealListUseCase.execute(meal: text) { [weak self] (response) in
             switch response {
             case .success(let meals):
                 self?.mealsList = meals
