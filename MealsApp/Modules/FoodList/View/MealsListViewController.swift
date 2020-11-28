@@ -17,10 +17,10 @@ class MealsListViewController: UIViewController {
     @IBOutlet weak var bannerImageView: UIImageView!
     
     @objc private func renewBanner() {
-        self.viewModel?.getRandomMeal(completion: { (response) in
+        viewModel?.getRandomMeal(completion: { [weak self] (response) in
             switch response {
             case .success(let url):
-                self.bannerImageView.image(fromUrl: url)
+                self?.bannerImageView.image(fromUrl: url)
             case .failure(_):
                 break
             }
@@ -49,22 +49,22 @@ class MealsListViewController: UIViewController {
     }
     
     private func configureBannerImageView() {
-        self.bannerImageView.contentMode = .scaleAspectFill
-        self.timer = Timer.scheduledTimer(timeInterval: 30, target: self, selector: #selector(renewBanner), userInfo: nil, repeats: true)
+        bannerImageView.contentMode = .scaleAspectFill
+        timer = Timer.scheduledTimer(timeInterval: 30, target: self, selector: #selector(renewBanner), userInfo: nil, repeats: true)
     }
     
     private func configureSearchBar() {
-        self.searchBar.delegate = self
-        self.searchBar.searchTextField.addDoneButtonOnKeyboard()
+        searchBar.delegate = self
+        searchBar.searchTextField.addDoneButtonOnKeyboard()
     }
     
     private func configureTableView() {
         let nib = UINib(nibName: "MealTableViewCell", bundle: nil)
-        self.tableView.register(nib, forCellReuseIdentifier: "MealTableViewCell")
-        self.tableView.delegate = self
-        self.tableView.dataSource = self
-        self.tableView.allowsSelection = true
-        self.tableView.tableFooterView = UIView(frame: .zero)
+        tableView.register(nib, forCellReuseIdentifier: "MealTableViewCell")
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.allowsSelection = true
+        tableView.tableFooterView = UIView(frame: .zero)
     }
     /*
     // MARK: - Navigation
@@ -113,7 +113,7 @@ extension MealsListViewController: UISearchBarDelegate {
         guard let text = searchBar.text else {
               return
           }
-        self.viewModel?.getMealsSearch(using: text, completion: { [weak self] (response) in
+        viewModel?.getMealsSearch(using: text, completion: { [weak self] (response) in
             switch response {
             case .success:
                 DispatchQueue.main.async {
