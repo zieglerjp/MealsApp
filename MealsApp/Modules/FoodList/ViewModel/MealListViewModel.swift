@@ -54,13 +54,13 @@ extension MealListViewModelAdapter: MealListViewModel {
     }
     
     func getMealsSearch(using text: String, completion: @escaping (GetMealsSearchResponse) -> ()) {
-        self.getMealListUseCase.execute(meal: text) { (response) in
+        self.getMealListUseCase.execute(meal: text) { [weak self] (response) in
             switch response {
             case .success(let meals):
-                self.mealsList = meals
+                self?.mealsList = meals
                 completion(.success)
             case .empty:
-                self.mealsList = []
+                self?.mealsList = []
                 completion(.empty)
             case .failure(let error):
                 completion(.failure(error))
