@@ -28,7 +28,7 @@ class MealDetailViewController: UIViewController {
     }
     
     private func configureNavigationBar() {
-        self.title = "Meal Detail"
+        title = "Meal Detail"
      }
     
     func configureUI() {
@@ -40,29 +40,29 @@ class MealDetailViewController: UIViewController {
     }
     
     private func configureTextView() {
-        self.mealInstructionsTextView.text = viewModel?.getInstructions
+        mealInstructionsTextView.text = viewModel?.getInstructions
     }
     
     private func configureNameLabel() {
-        self.mealNameLabel.text = viewModel?.getName
-        self.mealNameLabel.font = .systemFont(ofSize: 30, weight: .regular)
-        self.mealNameLabel.numberOfLines = 0
-        self.mealNameLabel.textAlignment = .center
+        mealNameLabel.text = viewModel?.getName
+        mealNameLabel.font = .systemFont(ofSize: 30, weight: .regular)
+        mealNameLabel.numberOfLines = 0
+        mealNameLabel.textAlignment = .center
     }
     
     private func configureTableView() {
         let nib = UINib(nibName: "MealIngredientsTableViewCell", bundle: nil)
-        self.mealsIngredientsTableView.register(nib, forCellReuseIdentifier: "MealIngredientsTableViewCell")
-        self.mealsIngredientsTableView.dataSource = self
-        self.mealsIngredientsTableView.allowsSelection = false
-        self.mealsIngredientsTableView.tableFooterView = UIView(frame: .zero)
+        mealsIngredientsTableView.register(nib, forCellReuseIdentifier: "MealIngredientsTableViewCell")
+        mealsIngredientsTableView.dataSource = self
+        mealsIngredientsTableView.allowsSelection = false
+        mealsIngredientsTableView.tableFooterView = UIView(frame: .zero)
     }
     
     private func configureWebKit() {
         guard let link = viewModel?.getYoutubeLink else {
             return
         }
-        self.webView.load(.init(url: link))
+        webView.load(.init(url: link))
     }
 
     /*
@@ -79,7 +79,7 @@ class MealDetailViewController: UIViewController {
 
 extension MealDetailViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.viewModel?.getIngredients.count ?? 0
+        return viewModel?.getIngredients.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
